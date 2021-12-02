@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+
+{% endblock style %}
+{% block script %}
+    <script defer src="{% static 'mealRatings/meal_detail.js' %}"></script>
+{% endblock script %}
+    
+
+{% block content %}
+    {% include "./header.html" %}
+    <div class="container d-flex justify-content-center">
+        <table class="table table-bordered mt-3">
+            <tbody>
+                <tr>
+                    <td id="image-container" colspan="2">
+                        <h2 class="text-center">{{meal.name}}</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="image-container" colspan="2">
+                        <div class="d-flex justify-content-center">
+                            <img class="w-25 h-auto" src="{{meal.imageUrl}}">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-4 text-center">Contry of origin:</td>
+                    <td class="col-8">{{meal.countryOfOrigin}}</td>
+                </tr>
+                <tr>
+                    <td class="col-4 text-center">Description:</td>
+                    <td class="col-8">{{meal.description}}</td>
+        
+                </tr>
+                <tr>
+                    <td class="col-4 text-center">Avg rating:</td>
+                    <td class="col-8">{{meal.rating_avg | floatformat:"-2"}}</td>
+                </tr>
+                <tr>
+                    <td class="col-4 text-center">Votes:</td>
+                    <td class="col-8">{{meal.num_of_rating}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="col-6">
+            <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="meal_pk" value="{{meal.pk}}">
+            {{form.meal}}
+            <div class="col-12">
+                <div class="d-flex justify-content-start">
+                    <P>Your Rating: <span id="rating-value">2.5</span></P>
+                </div>
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <div class="mx-2">0</div>
+                    {{form.rating}}
+                    {% comment %} <input class="w-100 mx-2" id="rating" type="range" min="0" max="5" step="0.1"> {% endcomment %}
+                    <div class="mx-2">5</div>
+                    <button class="btn btn-secondary mx-2" type="submit">Submit</button>
+                </div>
+                
+                
+            </div>
+        </form>
+        </div>
+        
+    </div>
+    
+{% endblock content %}
+
+

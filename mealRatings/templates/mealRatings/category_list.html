@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'mealRatings/category_list.css' %}">
+{% endblock style %}
+
+{% block content %}
+    {% include "./header.html" %}
+    <div class="container">
+        <div id="title-container" class="d-flex justify-content-center flex-wrap">
+            <h1 class="col-12 text-center">{{title | capfirst}}</h1>
+        </div>
+        <div id="sort-container" class="d-flex justify-content-end">
+            <div class="col-12 col-md-6 d-flex flex-column">
+                <div>
+                    <p class="my-0 py-0 text-center">Sort:</p>
+                </div>
+                <div class="d-flex justify-content-center"> 
+                    <div class="col-3 col-lg-2 text-center">
+                        <a href="{% url 'category_list' category %}?sort=rating">Rating</a>
+                    </div>
+                    <div class="col-3 col-lg-2 text-center">
+                        <a href="{% url 'category_list' category %}?sort=country">Country</a>
+                    </div>
+                    <div class="col-3 col-lg-2 text-center">
+                        <a href="{% url 'category_list' category %}?sort=date">Date</a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div id="meal-container" >
+            {% for meal in meals %}
+                <div class="meal d-flex flex-wrap my-2">
+                   
+                    <div class="col-md-4">
+                        <div class="col-12">
+                            <img class="w-100 h-auto" src="{{meal.imageUrl}}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-7 d-flex flex-column justify-content-center">
+                        <h4>{{meal.name}}({{meal.countryOfOrigin}})</h4>
+                        <p>{{meal.description}}</p>
+                        <p>Avg Rating: {{meal.rating_avg | floatformat:"-2"}}</p>
+                        <p>Votes:{{meal.num_of_rating}}</p>
+                        <p>Date Added: {{meal.dateAdded | date:"D d M Y"}}</p>
+                    </div>
+                     <a href="{% url "meal_detail" pk=meal.pk %}"></a>
+                </div>        
+            {% endfor %}
+        </div>
+    </div>
+    
+{% endblock content %}
+
+

@@ -1,0 +1,38 @@
+{% extends "base.html"%}
+{% load static%}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'mealRatings/header.css' %}">
+{% endblock style %}
+{% block header %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Meal Ratings</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{%url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'category_list' 'morning' %}">Morning</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'category_list' 'afternoon' %}">Afternoon</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'category_list' 'evening' %}">Evening</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'category_list' 'recently_added' %}">Recent</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'category_list' 'top_rated_foods' %}">Top Rated</a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock header %}
+
+{% block content %}
+{% endblock content %}

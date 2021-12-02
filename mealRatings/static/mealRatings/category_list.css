@@ -1,0 +1,38 @@
+.meal {
+    position: relative;
+}
+
+.meal a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width: 100%;
+}
+
+.meal a:hover {
+    opacity: 0.1;
+}
+
+#title-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 4rem;
+    height: 3rem;
+    z-index: 3;
+    background-color: white;
+  }
+
+
+  #sort-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 7rem;
+    z-index: 3;
+    background-color: white;
+  }
+
+  /* body{
+      background-image: url(https://st.depositphotos.com/2977159/4405/i/950/depositphotos_44059145-stock-photo-wooden-texture-with-natural-wood.jpg);
+      background-size: contain;
+  } */

@@ -1,0 +1,49 @@
+.img-container::before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+
+  .img-container{
+    position: relative;
+    width: 100%;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  .img-container a{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width: 100%;
+  }
+
+body {
+  background-image: url(https://wallpaperaccess.com/full/1737971.jpg);
+  background-size: cover;
+}
+
+#add-meal-form {
+  background-color: rgba(241, 241, 241,0.8);
+  border-radius: 3%;
+}
+
+a {
+  font-size: 1.5rem;
+}
+
+#meal-container{
+  background-color: rgba(241, 241, 241, 0.6);
+  border-radius: 3%;
+}
+
+h1{
+  font-size: 5rem;
+}
