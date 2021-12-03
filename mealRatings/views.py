@@ -12,7 +12,8 @@ from django.db.models import Count, Max, Min, Avg
 class IndexView(View):
 
     def get(self,request):
-        context = self.get_context_data()
+        context ={}
+        context["meals"] = Meal.objects.all().annotate(rating_avg = Avg('mealrating__rating'),num_of_rating = Count('mealrating__rating'))
         return render(request,"mealRatings/index.html",context=context)
 
     def post(self,request):
@@ -39,7 +40,8 @@ class IndexView(View):
         print(context)
         return context
 
-    
+
+
 
        
 class CategoryListView(ListView):
