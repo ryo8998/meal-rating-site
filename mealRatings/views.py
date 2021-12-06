@@ -2,6 +2,7 @@ from typing import Container
 from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import View, ListView, DetailView
+from django.views.generic.base import TemplateView
 from .models import Meal, MealRating
 from .forms import MealForm, MealRatingForm
 import datetime
@@ -12,7 +13,8 @@ from django.db.models import Count, Max, Min, Avg
 class IndexView(View):
 
     def get(self,request):
-        context = self.get_context_data()
+        context ={}
+        context["meals"] = Meal.objects.all().annotate(rating_avg = Avg('mealrating__rating'),num_of_rating = Count('mealrating__rating'))
         return render(request,"mealRatings/index.html",context=context)
 
     def post(self,request):
@@ -39,7 +41,8 @@ class IndexView(View):
         print(context)
         return context
 
-    
+
+
 
        
 class CategoryListView(ListView):
@@ -103,3 +106,6 @@ class MealDetailView(View):
             return redirect(to="/")
         else:
             return Http404("Error")
+
+class LoginView(TemplateView):
+    template_name = "mealRatings/login.html"

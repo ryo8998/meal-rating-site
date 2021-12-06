@@ -7,11 +7,76 @@
 
 
 {% block content %}
+    {% include './header.html' %}
     <div class="d-flex flex-wrap justify-content-around">
-        <div id="title-container" class="col-12">
-            <h1 class="text-center my-3">Rate Your Favorite Meals</h1>
+        <div id="title-container" class="col-12 d-flex justify-content-center">
+            <div class="col-6 d-flex justify-content-center flex-wrap">
+                <h1 class="col-12 text-center my-3">Meal Recommender</h1>
+                <p class="col-12 text-center my-3">Select one or more buttons to narrow down your<br>search and register to see recommendations</p>
+            </div>
         </div>
-        <div id="meal-container" class="d-flex col-8 justify-content-around py-3">
+
+        <div id="category-buttons-container" class="col-12 d-flex justify-content-center my-3">
+            <div class="col-1 d-flex justify-content-center">
+                <button class="category-button btn btn-secondary ">Vegetarian</button>
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <button class="category-button btn btn-secondary ">Spicy</button>
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <button class="category-button btn btn-secondary ">Healthy</button>
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <button class="category-button btn btn-secondary ">Morning</button>
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <button class="category-button btn btn-secondary ">Afternoon</button>
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <button class="category-button btn btn-secondary ">Evening</button>
+            </div>
+        </div>
+
+        <div id="sort-container" class="col-12 d-flex justify-content-end">
+            <div class="col-12 col-md-6 d-flex flex-column">
+                <div>
+                    <p class="my-0 py-0 text-center">Sort:</p>
+                </div>
+                <div class="d-flex justify-content-center"> 
+                    <div class="col-3 col-lg-2 text-center">
+                        <a href="{% url 'index' %}?sort=rating">Rating</a>
+                    </div>
+                    <div class="col-3 col-lg-2 text-center">
+                        <a href="{% url 'index' %}?sort=country">Country</a>
+                    </div>
+                    <div class="col-3 col-lg-2 text-center">
+                        <a href="{% url 'index' %}?sort=date">Date</a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div id="meal-container" class="col-12">
+            {% for meal in meals %}
+                <div class="meal d-flex flex-wrap my-2">
+                
+                    <div class="col-md-2">
+                        <div class="col-12">
+                            <img class="w-100 h-auto" src="{{meal.imageUrl}}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-7 d-flex flex-column justify-content-center">
+                        <h4>{{meal.name}}({{meal.countryOfOrigin}})</h4>
+                        <p>{{meal.description}}</p>
+                        <p>Avg Rating: {{meal.rating_avg | floatformat:"-2"}}</p>
+                        <p>Votes:{{meal.num_of_rating}}</p>
+                        <p>Date Added: {{meal.dateAdded | date:"D d M Y"}}</p>
+                    </div>
+                    <a href="{% url "meal_detail" pk=meal.pk %}"></a>
+                </div>        
+            {% endfor %}
+        </div>
+
+        {% comment %} <div id="meal-container" class="d-flex col-8 justify-content-around py-3">
             <div id="morning-container" class="d-flex flex-column col-2">
                 <a href="{%url 'category_list' 'morning' %}">Morning</a>
                 {% for meal in  morning%}
@@ -57,9 +122,9 @@
                     </div>
                 {% endfor %}
             </div>
-        </div>
+        </div> {% endcomment %}
 
-        <div id="add-meal-form" class="col-3  mx-1">
+        {% comment %} <div id="add-meal-form" class="col-3  mx-1">
                 <h2 class="my-2">Add New Meal</h2>
                 <form action="{% url 'index' %}" method="post">
                     {% csrf_token %}
@@ -87,6 +152,6 @@
                         <button class="btn btn-secondary" type="submit">Submit</button>
                     </div>
                 </form>
-        </div>
+        </div> {% endcomment %}
     </div>
 {% endblock content %}

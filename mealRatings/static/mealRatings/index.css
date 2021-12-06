@@ -9,6 +9,9 @@
     width: 100%;
   }
 
+  p{
+    font-size: 1.5rem;
+  }
   img {
     position: absolute;
     top: 0;
@@ -25,10 +28,14 @@
     width: 100%;
   }
 
-body {
+  .category-button {
+    width: 200px;
+  }
+
+/* body {
   background-image: url(https://wallpaperaccess.com/full/1737971.jpg);
   background-size: cover;
-}
+} */
 
 #add-meal-form {
   background-color: rgba(241, 241, 241,0.8);
