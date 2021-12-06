@@ -2,6 +2,7 @@ from typing import Container
 from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import View, ListView, DetailView
+from django.views.generic.base import TemplateView
 from .models import Meal, MealRating
 from .forms import MealForm, MealRatingForm
 import datetime
@@ -105,3 +106,6 @@ class MealDetailView(View):
             return redirect(to="/")
         else:
             return Http404("Error")
+
+class LoginView(TemplateView):
+    template_name = "mealRatings/login.html"
