@@ -5,13 +5,17 @@ from django.urls import reverse_lazy
 from accounts.forms import SignUpForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
+# from faker import Faker
 # Create your views here.
 
 class SignUpView(View):
 
     def get(self,request):
         form = SignUpForm
+        # fake = Faker()
+        # print(fake.name())
         return render(request,"registration/signup.html",context={'form':form})
+
 
     def post(self,request):
         print(request.POST.get('username'))
